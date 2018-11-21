@@ -35,7 +35,5 @@ function CreateDocumentLibrary
 #Get the Web
 $web = Get-SPWeb "http://sample.com:17777/"
   
-# Execute Create Document Library
-Create-DocumentLibrary $web "Team Documents" "Library to Share Team Documents"
-
-#Read more: http://www.sharepointdiary.com/2015/02/create-document-library-in-sharepoint-using-powershell.html#ixzz5XUteeYeT
+# Create Document Library
+Create-DocumentLibrary $web "A00" "Sample Document List",  "Sample Doument Library for A Team"

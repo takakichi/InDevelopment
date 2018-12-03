@@ -36,4 +36,4 @@ function CreateDocumentLibrary
 $web = Get-SPWeb "http://sample.com:17777/"
   
 # Create Document Library
-Create-DocumentLibrary $web "A00" "Sample Document List",  "Sample Doument Library for A Team"
+Create-DocumentLibrary $web "A00" "Sample Document List" "Sample Doument Library for A Team"

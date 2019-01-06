@@ -1,0 +1,29 @@
+# サイト名
+site_name: Visual Basic .NET コーディングルール
+#
+# 
+#
+theme:
+  name: 'material'
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  language: 'ja'
+#
+# 
+#
+extra:
+  search:
+    language: 'jp'
+#
+#
+#
+nav:
+    - 'ホーム': './'
+        - 'ネーミングルール': './'
+       - '変数': './naming/variables.md'
+       - 'コントロール': './naming/controls.md'
+#
+# 
+#
+markdown_extensions:

@@ -15,21 +15,21 @@ function CopyDocumentLibraryView
     if(($Web.Lists.TryGetList($LibraryName)) -eq $null) {
         Write-Host "Not Exists Document Library '$LibraryName'" -f Red
     } else {
-        $List = $Web.Lists($LibraryName)
+        $List = $Web.Lists[$LibraryName]
         $Views = $List.Views
         $View = $Views[$ViewName]
         # -------------------------------------------------
         # Get Source View Attributes
         # -------------------------------------------------
         $RowLimit = $View.RowLimit
+        $ViewFields = $View.Fields
         $Paged = $View.Paged
         $Query = $View.ViewQuery
         $DefaultView = $View.DefaultView
-        $ViewFieldCollection = $View.ViewFieldCollection
         # -------------------------------------------------
         # Set New View Attribute
         # -------------------------------------------------
-        $NewViewFieldCollection = $ViewFieldCollection
+        $NewViewFields = $ViewFields
         $NewDefaultView = $DefaultView
         $NewQuery = $Query
         $NewRowLimit = $RowLimit
@@ -38,8 +38,8 @@ function CopyDocumentLibraryView
         # -------------------------------------------------
         # Create New View
         # -------------------------------------------------
-        $view = $Views.Add($NewViewName, $NewViewFieldCollection, $NewQuery, $NewRowLimit, $NewPaged, $NewDefaultView)
-        Write-Host "Create Copy New View '$LibraryName' - '$NewViewName' Successfully!" -f Green
+        $view = $Views.Add($NewViewName, $NewViewFields, $NewQuery, $NewRowLimit, $NewPaged, $NewDefaultView)
+        Write-Host "Create Copy View '$LibraryName' -> '$NewViewName' Successfully!" -f Green
     }
 }
   

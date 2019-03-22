@@ -1,16 +1,16 @@
 ################################################################################
 #	File Get-SitePermissions
-#	Title ƒTƒCƒg‚ÌŒ ŒÀæ“¾—p PowerShell ƒXƒNƒŠƒvƒg
-#	Description SharePoint 2013 —pƒTƒCƒg‚ÌŒ ŒÀ‚Ìˆê——‚ğæ“¾‚·‚é PowerShell ƒXƒNƒŠƒvƒg
+#	Title ï¿½Tï¿½Cï¿½gï¿½ÌŒï¿½ï¿½ï¿½ï¿½æ“¾ï¿½p PowerShell ï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
+#	Description SharePoint 2013 ï¿½pï¿½Tï¿½Cï¿½gï¿½ÌŒï¿½ï¿½ï¿½ï¿½Ìˆê——ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½ PowerShell ï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
 #	Created Kokuho Hi  SharePoint Technology Center
 #	Copyright Copyright (C) 2015 Sonorite Co.,LTD. All rights reserved.
 #	Update History
-#	0.01 2015.02.11 ì¬ŠJn
-#	0.10 2015.02.11 ƒvƒƒgƒ^ƒCƒvŠ®¬
+#	0.01 2015.02.11 ï¿½ì¬ï¿½Jï¿½n
+#	0.10 2015.02.11 ï¿½vï¿½ï¿½ï¿½gï¿½^ï¿½Cï¿½vï¿½ï¿½ï¿½ï¿½
 # http://blog2nd.sharepoint-factory.net/article/113552129.html
 ################################################################################
 
-# ƒpƒ‰ƒ[ƒ^’è‹`
+# ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½`
 Param(
 	[string]$Identity,
 	[string]$ContentDatabase,
@@ -24,11 +24,11 @@ function Get-Permissions ($web)
 
 	foreach ($assignments in $web.RoleAssignments) {
 		if ($assignments.Member.XML.StartsWith('Group') -eq True) {
-			$type = SharePoint ƒOƒ‹[ƒv
+			$type = SharePoint ï¿½Oï¿½ï¿½ï¿½[ï¿½v
 		} elseif ($assignments.Member.IsDomainGroup) {
-			$type = ƒhƒƒCƒ“ ƒOƒ‹[ƒv
+			$type = ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ ï¿½Oï¿½ï¿½ï¿½[ï¿½v
 		} else {
-			$type = ƒ†[ƒU[
+			$type = ï¿½ï¿½ï¿½[ï¿½Uï¿½[
 		}
 		$role = ($assignments.RoleDefinitionBindings  Select-Object -ExpandProperty name)
 		$results += New-Object PSObject -Property @{
@@ -42,7 +42,7 @@ function Get-Permissions ($web)
 	$results
 }
 
-# ƒTƒCƒg‚ÌŒ ŒÀ‚Ìæ“¾
+# ï¿½Tï¿½Cï¿½gï¿½ÌŒï¿½ï¿½ï¿½ï¿½Ìæ“¾
 function Get-Site ($web)
 {
 	$results = @()
@@ -57,7 +57,7 @@ function Get-Site ($web)
 	$results
 }
 
-# ƒTƒCƒgƒRƒŒƒNƒVƒ‡ƒ“æ“¾
+# ï¿½Tï¿½Cï¿½gï¿½Rï¿½ï¿½ï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 function Get-SiteCollection ($sitecollection)
 {
 	$results = @()
@@ -69,7 +69,7 @@ function Get-SiteCollection ($sitecollection)
 	Write-Output $results
 }
 
-# ƒpƒ‰ƒ[ƒ^ˆ—
+# ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½
 function Get-CommandLineOptions
 {
 	if ($Identity) {
@@ -81,7 +81,7 @@ function Get-CommandLineOptions
 	}
 }
 
-# ƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg
+# ï¿½Gï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½|ï¿½Cï¿½ï¿½ï¿½g
 Get-CommandLineOptions
 
 ################################################################################

@@ -1,12 +1,13 @@
 #
-# Read Œ ŒÀ•t—^
+# Windows Folder Permisstion "Add Read And Execute Permission"
 #
-Function SetPermReadOnly ( $folder_name, $params ) {
+
+Function SetPermReadOnly ( [String] $folder_name, [String] $user ) {
   $acl   = Get-Acl $folder_name
-  $rule = New-Object System.Security.AccessControl.FileSystemAccessRule $params
+  $permissions = ( $user, "ReadAndExecute", "ContainerInherit, ObjectInherit", "None", "Allow" )
+  $rule = New-Object System.Security.AccessControl.FileSystemAccessRule $permissions
   $acl.SetAccessRule($rule)
   $acl | Set-Acl $folder_name
 }
 
-$param = ( $user, "ReadAndExecute", "ContainerInherit, ObjectInherit", "None", "Allow" )
-Set-Perm ( $folder, $param )
+SetPermReadOnly "c:\temp" "hekiheki"

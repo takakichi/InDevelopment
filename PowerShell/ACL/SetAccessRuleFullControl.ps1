@@ -1,13 +1,14 @@
 
-Function SetPermReadOnly ( $folder_name, $user, $perms ) {
-
-$fc_user_name = 'domain\username'
-$acl = Get-Acl $folder_path
-$permission = ($fc_user_name,"FullControl","ContainerInherit, ObjectInherit", "None","Allow")
-# ˆø”Fƒ†[ƒU[–¼,ƒAƒNƒZƒXŒ ,‰ºˆÊƒtƒHƒ‹ƒ_‚ÖŒp³,‰ºˆÊƒIƒuƒWƒFƒNƒg‚ÖŒp³,Œp³‚Ì§ŒÀ,ƒAƒNƒZƒX‹–‰Â
-$accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule $permission
-$acl.SetAccessRule($accessRule)
-$acl | Set-Acl $folder_path
-
+#
+# Windows Folder Permisstion "Add FullControl"
+#
+Function SetAccessFullControl ( [string] $folder_name, [string] $user ) {
+  $acl = Get-Acl $folder_name
+  # ãƒ¦ãƒ¼ã‚¶ãƒ¼å, ã‚¢ã‚¯ã‚»ã‚¹æ¨©, ä¸‹ä½ãƒ•ã‚©ãƒ«ãƒ€ã¸ç¶™æ‰¿, ä¸‹ä½ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¸ç¶™æ‰¿, ç¶™æ‰¿ã®åˆ¶é™, ã‚¢ã‚¯ã‚»ã‚¹è¨±å¯
+  $permissions = ( $user, "FullControl", "ContainerInherit, ObjectInherit", "None", "Allow" )
+  $rule = New-Object System.Security.AccessControl.FileSystemAccessRule $permissions
+  $acl.SetAccessRule($rule)
+  $acl | Set-Acl $folder_name
 }
 
+SetAccessFullControl "c:\temp" "domain/user"

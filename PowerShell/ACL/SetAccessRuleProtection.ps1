@@ -1,10 +1,11 @@
 #
-# Œp³‚Ì–³Œø‰»
+# ç¶™æ‰¿ã®ç„¡åŠ¹åŒ–
 #
-function SetAccessRuleProtection( $folder_name ) {
+function SetAccessRuleProtection( [string] $folder_name ) {
 	$folder_name = 'c:\temp'
 	$acl = Get-Acl $folder_name
 	$acl.SetAccessRuleProtection( $true, $true )
 	$acl | Set-Acl folder_name
 }
-SetAccessRuleProtection( "c:\temp" )
+
+SetAccessRuleProtection "c:\temp"

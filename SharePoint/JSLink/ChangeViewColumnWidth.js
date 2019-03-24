@@ -18,6 +18,6 @@
 // OnPostRender Event Function
 // ------------------------------------------------------------------
 function postRenderHandler(ctx) {
-	$(“div[name='Column1']").css(“width", “50px");
-	$(“div[name='Column2']").css(“width", “100px");
+	$("div[name='Column1']").css("width", "50px");
+	$("div[name='Column2']").css("width", "100px");
 }

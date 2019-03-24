@@ -1,0 +1,77 @@
+<!DOCTYPE html> 
+<html lang="ja" class="">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+/*
+	----------------------------------------------
+	囲み文字サンプル1
+	参考 : https://medialabo.info/blog/?p=8370
+	----------------------------------------------
+*/
+.cube{
+	border-style: solid;				/* ボーダーを実線に */
+	border-width: 1px;					/* ボーダー線の太さを1pxに  */
+	border-color: #ff0000;				/* ボーダー線の色を指定 */
+	color:#ffffff;						/* ボーダー線の色を指定 */
+	font-size: 60% ;					/* フォントのサイズを80%に縮小して表示 */
+	border-radius: 2px 2px 2px 2px;		/* 囲い四角の四隅に丸みをつける  */ 
+	padding: 2px 2px 2px 2px ;			/* 文字と四角の間に余白をつくる  */
+	margin-left : 2px;					/* 左隣りの文字とのスペースを2pxつくる  */
+	margin-right: 2px;					/* 右隣りの文字とのスペースを2pxつくる  */
+	vertical-align: 10%;				/* 上下のずれを微修正；少し上に移動  */
+	background-color: #ff0000;			/* 背景に色を付ける  */       
+}
+/*
+	----------------------------------------------
+	囲み文字サンプル2
+	----------------------------------------------
+*/
+.cube2 {
+    background-color: #c00;
+    color: #fff;
+    font-size: x-small;
+}
+/*
+	----------------------------------------------
+	囲み文字(丸)サンプル2
+	参考 : https://qiita.com/noixip/items/daf1e39271efd14265ba
+	----------------------------------------------
+*/
+/* 円の基本形 */
+.maru {
+  display:			inline-flex;
+  justify-content:	center;
+  align-items:		center;
+  border-radius:	50%;
+  flex-flow:		column; 
+  vertical-align:	top;
+}
+/* 円の大きさ */
+.maru_size{
+  width  : 20px;
+  height : 20px;
+}
+/* 文字の大きさ */
+.marumoji_size {
+  font-size: 14px;
+}
+/* 円と文字の色 */
+.maru_color {
+  color:  #ffffff;
+  border: 0.5px solid red;
+  background-color : #ff0000;
+}
+
+
+</style>
+</head>
+<body>
+囲み文字サンプル1: <span class="cube">囲み文字サンプル1</span><br/>
+囲み文字サンプル2: <span class="cube2">囲み文字サンプル2</span><br/>
+丸文字サンプル1:
+<div class="maru maru_size maru_color"><div class="marumoji_size">あ</div>
+</div>
+
+</body>
+</html> 

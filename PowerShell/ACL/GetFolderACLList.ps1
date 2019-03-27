@@ -6,11 +6,12 @@ function ListACLFolder( [string] $folder_name ) {
     $list = Get-ChildItem $folder_name -Force -Recurse | where { $_.mode -match "d" }
     foreach($path in $list){ 
         write-host $path.fullname
-        $acls = Get-ACL $path.fullname | Select-object @{Label="Path";Expression={Convert-Path $_.Path}}, AccessToString
+        # $acls = Get-ACL $path.fullname | Select-object @{Label="Path";Expression={Convert-Path $_.Path}}
+        $acls = Get-ACL -Path $path.fullname
         foreach($acl in $acls){ 
-            $values = ($acl.AccessToString).split(" ")
+            $values = $acl.Access
             foreach($value in $values){ 
-                write-host $value
+                write-host $value.IdentityReference + " " + $value.FileSystemRights  
             }
             write-host "--------"
         }

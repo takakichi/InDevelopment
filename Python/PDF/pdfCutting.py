@@ -28,5 +28,5 @@ def split_pdf_pages( src_filename, dist_filename, start, pagenum ):
         dst_pdf.write(f)
 
 if __name__ == '__main__':
-    split_pdf_per_pages('./oreilly-978-4-87311-878-9e.pdf', './cutting', 'perpage')
-    # split_pdf_pages( './oreilly-978-4-87311-878-9e.pdf', './cutting.pdf', 20, 3)
+    # split_pdf_per_pages('./oreilly-978-4-87311-878-9e.pdf', './cutting', 'perpage')
+    split_pdf_pages( './oreilly-978-4-87311-878-9e.pdf', './cutting.pdf', 20, 3)

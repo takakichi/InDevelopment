@@ -1,0 +1,184 @@
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<script type="text/javascript" src="../js/jquery-1.11.2.js"></script> 
+<script type="text/javascript" src="../js/jquery-ui-1.11.3.js"></script> 
+<script type="text/javascript" src="../js/tabulator.min.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap.js"></script>
+<link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../css/tabulator.min.css" rel="stylesheet">
+<link href="../css/jquery-ui-1.11.3.custom.css" rel="stylesheet">
+</head>
+<style>
+	.no-close .ui-dialog-titlebar-close {
+		display :none;	
+	}
+</style>
+<script lang="JavaScript">
+	document.addEventListener("DOMContentLoaded", function(e) {
+        ReadNavigation("./navigation.html");
+		// --------------------------------------
+		// サンプルデータ
+		// --------------------------------------
+		var tabledata = [
+			{id:"000001", name:"Oli Bob",            sex:1, exist_flag:1, age:"12", col:"red", dob:""},
+		 	{id:"000002", name:"Mary May",           sex:1, exist_flag:1, age:"1", col:"blue", dob:"14/05/1982"},
+			{id:"000003", name:"Christine Lobowski", sex:1, exist_flag:1, age:"42", col:"green", dob:"22/05/1982"},
+			{id:"000004", name:"Brendon Philips",    sex:1, exist_flag:1, age:"125", col:"orange", dob:"01/08/1980"},
+			{id:"000005", name:"Margret Marmajuke",  sex:1, exist_flag:1, age:"16", col:"yellow", dob:"31/01/1999"},
+		];
+		// --------------------------------------
+		// create Tabulator on DOM element with id "example-table"
+		// --------------------------------------
+		var table = new Tabulator("#example-table", {
+			height:520,
+			data:tabledata,
+			layout:"fitColumns",
+			columns:[
+				{title:"",         field:"chk",        align:"center",  width:60, formatter:"tickCross"},
+				{title:"従業員番号", field:"id",         align:"left",    width:120},
+				{title:"名前",      field:"name",       editable:true,   editor:"input", width:150},
+				{title:"性別",      field:"sex",        editor:"select", editorParams:sexParam },
+				{title:"年齢",      field:"age",        align:"left",    formatter:"progress"},
+				{title:"在籍",      field:"exist_flag", editor:"select", editorParams:existFlagParam},
+				{title:"誕生日",     field:"dob",   sorter:"date", align:"center"},
+				{title:"",          field:"new",        align:"center",  visible:false, width:10 },
+				{title:"",          field:"update",     align:"center",  visible:false, width:10 },
+				{title:"",          field:"delete",     align:"center",  visible:false, width:10 }
+			],
+			rowClick:function(e, row){
+				console.log("Row " + row.getData().id + " Clicked!!!!");
+			},
+			rowDblClick:function(e,row) {
+				console.log("Row " + row.getData().id + " Clicked!!!!");
+				alert("Double Click " + row.getData().id);
+			},
+			rowAdded:function(row){
+    			// row - row component
+			},
+			rowUpdated:function(row){
+    			// row - row component
+		    },			
+			rowDeleted:function(row){
+    			//row - row component
+    		}
+		});
+		function sexParam(cell) {
+			var result = [
+				{label:"男性", value:1},
+				{label:"女性", value:2}
+			];
+			return result;
+		}
+		function existFlagParam(cell) {
+			var result = [
+				{label:"在籍",  value:1},
+				{label:"未在籍", value:0}
+			];
+			return result;
+		}
+		table.setData(tabledata);
+        ReadNavigation("./navigation.html");
+	})
+
+	document.addEventListener("click", function(e) {
+		if ( e.target.hasAttribute("id")) {
+    		if ( e.target.id == "reload") {
+				$("#dialog-reload").dialog({
+					resizable : false,
+					title     : "保存",
+					height    : 140,
+					modal     : true,
+					buttons   : {
+						Apply: function() {
+							$(this).dialog("close");
+						},
+						Cancel: function() {
+							$(this).dialog("close");
+						}
+					}
+				})
+			}
+	    	if ( e.target.id == "regist") {
+				$("#dialog-regist").dialog({
+					dialogclass: "no-close",
+					resizable : false,
+					title     : "新規登録",
+					height    : 320,
+					modal     : true,
+					buttons   : {
+						Save: function() {
+							$(this).dialog("close");
+						},
+						Cancel: function() {
+							$(this).dialog("close");
+						}
+					}
+				})
+			}
+    		if ( e.target.id == "edit") {
+				$("#dialog-reload").dialog({
+					resizable : false,
+					title     : "編集",
+					height    : 320,
+					modal     : true,
+					buttons   : {
+						Apply: function() {
+							$(this).dialog("close");
+						},
+						Cancel: function() {
+							$(this).dialog("close");
+						}
+					}
+				})
+			}
+		}
+	})
+	</script>
+<body>
+	<div id="nav"/>
+	<div class="container">
+	<div>
+		<button id="reload" type="button">リロード</button>
+		<button id="save" type="button">保存</button>
+		<button id="regist" type="button">新規登録</button>
+		<button id="edit" type="button">編集</button>
+	</div>
+	<div id="example-table"></div>
+<!--
+	ダイアログメッセージ
+-->
+<div id="dialog-reload" title="確認" style="display:none;">
+	<p>
+		<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 70px,120px,0;"></span>
+		データベースからデータを読み直しますがよろしいですか？
+	</p>
+</div>
+<div id="dialog-regist" title="保存" style="display:none;">
+	<p>
+		<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 70px,120px,0;"></span>
+		変更したデータを登録しますがよろしいですか？
+	</p>
+</div>
+<!--
+	新規登録ダイアログ
+-->
+<div id="dialog-regist" title="新規登録" style="display:none;">
+	<p>
+		<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px,20px,0;"></span>
+		変更したデータを登録しますがよろしいですか？
+	</p>
+</div>
+<!--
+	編集ダイアログ
+-->
+<div id="dialog-edit" title="編集" style="display:none;">
+	<p>
+		<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px,20px,0;"></span>
+		変更したデータを登録しますがよろしいですか？
+	</p>
+</div>
+</div>
+</body>    
+</html>

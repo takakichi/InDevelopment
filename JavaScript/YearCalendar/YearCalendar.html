@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Working Time Input Sheet</title>
+<script language="javascript" src="./js/calendar.js"></script>
+<style>
+
+div {
+  border: none;
+  box-sizing: border-box;
+  font-size : 12px;
+}
+.month {
+  float: left;
+  width: 250px;
+}
+.gridBox {
+  width  : 1000px;
+  height : 300px; 
+  border: none;
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+td {
+  border     : 1px solid #ddd;
+  padding    : 5px;
+  text-align : center;
+}
+td:first-child {
+  color : white;
+  background-color: red;
+}
+td:last-child {
+  color : white;
+  background-color: blue;
+}
+td:is-holiday {
+  color : white;
+  background-color: red;
+}
+td:is-workingday {
+  color : black;
+  background-color: white;
+}
+td:is-disabled {
+  color : #eee;
+}
+
+</style>
+<script language="javascript">
+  document.addEventListener("DOMContentLoaded", function(e) {
+    year = 2019
+    for (  i = 0 ; i < 12 ; i++ ) {
+      showCalendar("month" + (i+1), year, i + 1 )
+    }
+    //
+    for ( j = -5 ; j < 1 ; j ++ ) {
+      let option = document.createElement("option")
+      option.value = year + j
+      option.text  = year + j  + "年"
+      document.getElementById("year").appendChild(option)
+    }
+    //
+    var placeArray = [ {placeid:"01", placename:"場所1"},
+                       {placeid:"02", placename:"場所2"},
+                       {placeid:"02", placename:"場所3"} ]
+    for ( k = 0 ; k < placeArray.length ; k++ ) {
+      let option = document.createElement("option")
+      option.value = placeArray[k].placeid
+      option.text  = placeArray[k].placename
+      document.getElementById("place").appendChild(option)
+    }
+  })
+  document.addEventListener("click", function(e) {
+    if(e.target.classList.contains("calendar_td")) {
+      // alert('クリックした日付は' + e.target.dataset.value + 'です')
+      e.target.dataset.changeflag = "1"
+      if ( e.target.dataset.value == "0" ) {
+        console.log( e.target.dataset.date + 'を平日から休日に変更します')
+        e.target.style.color = "white"
+        e.target.style.backgroundColor = "red"
+        e.target.dataset.value = "1"
+      } else if ( e.target.dataset.value == "1" ) {
+        console.log( e.target.dataset.date + 'を休日から平日に変更します')
+        if ( e.target.lastChild ) {
+          e.target.style.color = "black"
+          e.target.style.backgroundColor = "white"
+          e.target.dataset.value = "0"
+        }
+        else {
+          e.target.style.color = "white"
+          e.target.style.backgroundColor = "blue"
+          e.target.dataset.value = "0"
+        }
+      }
+      // e.target.className += "set-holiday"
+    }
+    if ( e.target.hasAttribute("id")) {
+      if ( e.target.id == "reload") {
+        year = 2020;
+        for (  i = 0 ; i < 12 ; i++ ) {
+          showCalendar("month" + (i+1), year, i + 1 )
+        }
+      }
+      if ( e.target.id == "save" ) {
+        alert("検索ボタンは開発中です");
+      }
+    }
+  })  
+</script>          
+
+</head>
+<body>
+<select id="year" name="year" style="width:200px;">
+</select>
+<select id="place" name="place" style="width:200px;">
+</select>
+<button id="reload" type="button">検索</button>
+<button id="save"   type="button">保存</button>
+<div class="gridBox">
+  <div id="month1" class="month" style="width:250px;height:250px;"></div>
+  <div id="month2" class="month" style="width:250px;height:250px;"></div>
+  <div id="month3" class="month" style="width:250px;height:250px;"></div>
+  <div id="month4" class="month" style="width:250px;height:250px;"></div>
+</div>
+<div class="gridBox">
+  <div id="month5" class="month" style="width:250px;height:250px;"></div>
+  <div id="month6" class="month" style="width:250px;height:250px;"></div>
+  <div id="month7" class="month" style="width:250px;height:250px;"></div>
+  <div id="month8" class="month" style="width:250px;height:250px;"></div>
+</div>
+<div class="gridBox">
+  <div id="month9" class="month" style="width:250px;height:250px;"></div>
+  <div id="month10" class="month" style="width:250px;height:250px;"></div>
+  <div id="month11" class="month" style="width:250px;height:250px;"></div>
+  <div id="month12" class="month" style="width:250px;height:250px;"></div>
+</div>
+</body>
+</html>
